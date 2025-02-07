@@ -1,3 +1,5 @@
+"use server";
+
 import client from "@/lib/db";
 import PostType from "../Interfaces/Post";
 
