@@ -12,17 +12,11 @@ export function ETIBCard({ content, date }: PostType) {
   const [comment, setComment] = useState("");
 
   function postComment() {
-    const formattedDate = new Date(date).toLocaleString("en-US", {
-      month: "numeric",
-      day: "2-digit",
-      year: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: true,
-    });
+    const formattedDate = new Date(date);
     const toSubn = { content: comment, date: formattedDate };
 
     postMessage(toSubn);
+    setComment("");
   }
 
   function handleChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
@@ -34,7 +28,7 @@ export function ETIBCard({ content, date }: PostType) {
         {content}
       </h5>
       <p className="font-normal text-gray-700 dark:text-gray-400">
-        {date}
+        {date.toLocaleDateString()}
       </p>
       <span className="flex p-2 space-x-4">
         <Textarea className="w-full" placeholder="Comment..." value={comment} onChange={handleChange}/>
