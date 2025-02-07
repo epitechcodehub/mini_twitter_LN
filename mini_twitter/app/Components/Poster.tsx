@@ -13,7 +13,7 @@ export function Poster() {
 
   function postComment() {
     const formattedDate = new Date();
-    const toSubn = { content: comment, date: formattedDate };
+    const toSubn = { content: comment, date: formattedDate, threads: [] };
 
     postMessage(toSubn);
     setComment("");

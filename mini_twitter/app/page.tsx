@@ -30,7 +30,7 @@ export default function Home() {
           messages.length > 0
             ? messages.map((message: any, index: number) => {
               console.log(message);
-              return <ETIBCard key={index} content={message.message.content} date={new Date(message.message.date)} />;
+              return <ETIBCard key={index} content={message.message.content} date={new Date(message.message.date)} threads={message.message.threads} id={message.message.id} />;
             })
             :
             <Spinner aria-label="Default status example" />
