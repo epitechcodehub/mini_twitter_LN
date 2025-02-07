@@ -1,8 +1,9 @@
 import client from "@/lib/db";
+import PostType from "../Interfaces/Post";
 
-const postMessage = (postType: ) => {
+const postMessage = (postType: PostType) => {
     try {
-        const db = client.db("Cluster0");
+        const db = client.db("database");
         const collection = db.collection("messages");
         const result = collection.insertOne({ message: postType });
         return result;
