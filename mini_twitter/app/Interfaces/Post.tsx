@@ -1,12 +1,11 @@
-import { ObjectId } from "mongodb";
+export interface PostThreadType {
+    content: string;
+    date: Date;
+}
 
 export default interface PostType {
     content: string;
     date: Date;
+    threads: PostThreadType[];
 }
 
-export interface PostThreadType {
-    idMessage: ObjectId;
-    content: string;
-    date: Date;
-}

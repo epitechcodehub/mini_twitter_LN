@@ -4,12 +4,14 @@ import Image from "next/image";
 import { ETIBCard } from "./Components/ETIBCard";
 import {getMessage, getMessages} from "./api/getMessage";
 import { useEffect } from "react";
+import postThread from "./api/postThread";
 
 export default function Home() {
 
   useEffect(() => {
     const fetchData = async () => {
       await getMessages().then((res) => console.log(res));
+      await postThread({ content: "je te jure", date: new Date() }, "67a5f2c6c4863c8ad44b7cd2");
     };
     fetchData();
   }, []);
