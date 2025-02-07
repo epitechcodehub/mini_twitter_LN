@@ -1,11 +1,19 @@
+"use client";
 
 import Image from "next/image";
 import postMessage from "./api/postMessage";
 import { ETIBCard } from "./Components/ETIBCard";
+import {getMessage, getMessages} from "./api/getMessage";
+import { useEffect } from "react";
 
 export default function Home() {
 
-  postMessage({ content: "Hello, World!" , date: "10" });
+  useEffect(() => {
+    const fetchData = async () => {
+      await getMessages().then((res) => console.log(res));
+    };
+    fetchData();
+  }, []);
 
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
