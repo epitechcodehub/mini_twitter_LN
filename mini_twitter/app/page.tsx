@@ -1,24 +1,42 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
+import { getMessage, getMessages } from "./api/getMessage";
+
+import PostType from "./Interfaces/Post";
+
 import Image from "next/image";
+import { Spinner } from "flowbite-react";
 import { ETIBCard } from "./Components/ETIBCard";
-import {getMessage, getMessages} from "./api/getMessage";
-import { useEffect } from "react";
+import { Poster } from "./Components/Poster";
+
 
 export default function Home() {
+  const [messages, setMessages] = useState<any>([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      await getMessages().then((res) => console.log(res));
+      await getMessages().then((res) => setMessages(res.reverse()));
     };
     fetchData();
   }, []);
-  // postMessage({ content: "Hello, World!" , date: "10" });
 
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <ETIBCard content="Get Started" date={new Date()} />
+        <span className="fixed top-0 left-1/2 transform -translate-x-1/2 z-50 bg-white p-4 w-[50%]">
+          <Poster />
+        </span>
+        {
+          messages.length > 0
+            ? messages.map((message: any, index: number) => {
+              console.log(message);
+              return <ETIBCard key={index} content={message.message.content} date={new Date(message.message.date)} />;
+            })
+            :
+            <Spinner aria-label="Default status example" />
+        }
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
         <a
